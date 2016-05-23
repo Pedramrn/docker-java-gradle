@@ -32,6 +32,11 @@ RUN mkdir -p /tmp/gradle ${GRADLE_HOME} && cd /tmp/gradle && \
     unzip -qq gradle.zip && \
     mv ./gradle-${GRADLE_VERSION}/* ${GRADLE_HOME}/
 
+# install docker-compose
+RUN curl -L https://github.com/docker/compose/releases/download/${COMPOSE_VERSION}/docker-compose-$(uname -s)-$(uname -m) \
+      > /usr/local/bin/docker-compose && \
+    chmod +x /usr/local/bin/docker-compose
+
 # cleanup
 RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* ${JAVA_HOME}/*src.zip && apt-get clean
 
